@@ -1,0 +1,185 @@
+\documentclass[10pt,reqno]{amsart}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{stmaryrd}
+\usepackage{hyperref}
+\usepackage{eucal}
+\usepackage{fullpage}
+\usepackage{outlines}
+
+\renewcommand{\labelitemi}{$\star$}
+
+\begin{document}
+
+\noindent \textit{Math 323: Graph Theory}
+
+\noindent \textit{Instructor: Sreekar M.~Shastry}
+
+\noindent \textit{Solutions to the Midterm Examination}
+
+\noindent \textit{2013-March-02-Sat, 0900-1030 in room C304 of HR4}
+
+\medskip
+
+\begin{itemize}
+    \item There are 6 problems. Each problem is worth 5 points. The
+        maximum score is 30 points.
+    \item This is an open book exam.
+    \item Clearly state the results from the book that you use, referring to
+      the page number.
+\end{itemize}
+
+\medskip
+
+\begin{outline}[enumerate]
+\1 Prove that every set of six people contains at least three mutual
+acquaintances or three mutual strangers.
+
+\medskip
+\noindent \emph{Solution.} Let $G$ be a graph with six vertices, one for each
+person, and an edge for each pair of people who are acquainted. Let $x$ be a
+vertex. Since $x$ has at most 5 neighbors, $x$ has at least 3 neighbors or at
+least 3 nonneighbors. We may assume without loss of generality that $x$ has at
+least 3 neighbors (if not, replace $G$ with $\overline{G}$ (= the complement of
+$G$)). If any pair of these people are acquainted, then taking them together
+with $x$ gives us a $K_3$ as an induced subgraph in $G$, or in other words, we
+have three mutual acquaintances. On the other hand, if no pair of the neighbors
+of $x$ is acquainted, then the neighbors of $x$ contain a set of three mutual
+strangers.
+
+In purely graph theoretical terms, this problem says that any graph on six
+vertices has $K_3$ or $\overline{K}_3$ as an induced subgraph.
+
+\medskip
+\1 Let $G$ be a graph with $|G| \ge 2.$ Show that $G$ has two vertices of equal
+degree.
+
+\medskip
+\noindent \emph{Solution.} The degree of a vertex in a graph with $n$ vertices
+is an element of \(\{0,1,\dots,n-1\}\). These are $n$ distinct values. Suppose
+that no two degrees are the same so that $0,1,\dots,n-1$ is the degree sequence
+of $G$. But a vertex of degree zero is isolated (not connected to any other
+vertex), and a vertex of degree $n-1$ is connected to every other vertex. These
+two conditions are contradictory.
+
+\medskip
+
+\medskip
+\1 A saturated hydrocarbon $C_k H_l$ is a molecule formed from $k$ carbon atoms
+and $l$ hydrogen atoms by adding bonds between atoms such that each carbon atom
+is in four bonds, each hydrogen atom is in one bond, and no sequence of bonds
+forms a cycle. Show that $l = 2k+2.$
+
+\medskip
+\noindent \emph{Solution.} Let $G$ be the graph made from the molecule, with
+vertices for the atoms and edges for the bonds. Thus $|G| = k+l$. The condition
+that there is no cycle means that $G$ is a tree, so $|E(G)| = k+l-1$. Now we
+use the fact that the sum of the degrees is equal to twice the number of edges
+to obtain \(4k+l = 2(k+l-1)\) and therefore $l=2k+2.$
+\medskip
+
+\medskip
+\1 Let $G$ be a weighted graph and let $T$ be a minimum spanning tree. Let $T'$
+be any other spanning tree, not necessarily of minimum weight. Show that $T'$
+can be transformed into $T$ by steps that exchange one edge of $T'$ for one
+edge of $T$ such that the edge set is always a spanning tree and the total
+weight never goes up.
+
+\medskip
+\noindent \emph{Solution.}
+The idea is simple: pick an edge $e'$ in $T'$ which is not in $T$ and then
+carefully choose an edge $e$ in $T$ so that the weight of $T'-e'+e$ doesn't go
+up. After finitely many steps, this procedure will transform $T'$ into $T.$ Now
+let us give the details of the proof.
+
+It suffices to find one step in the transformation from $T'$ to $T$. For if
+that has been done, then the entire sequence of steps exists by induction on
+the number of edges in which the two trees differ.
+
+Fix $e' \in E(T') - E(T)$. Then $T'-e' = U \sqcup V$ has two connected
+components. The path in $T$ between the endpoints of $e'$ must have an edge $e$
+from $U$ to $V$. Since $e$ is an edge of the path in $T$ between the endpoints
+of $e'$, the edge $e$ belongs to the unique cycle in $T+e'$. Thus $T+e'-e$ is
+also a spanning tree. The proof will be complete if we show \(w(T'-e'+e) \le
+w(T').\)
+
+Since $T$ has minimum weight, $w(T) \le w(T-e'+e)$, so we have $w(e) \le
+w(e')$. Therefore $w(T'-e'+e) \le w(T')$, as required.
+
+\medskip
+
+\medskip
+\1 Show that if $G'$ is obtained from a connected graph $G$ by adding edges
+joining pairs of vertices whose distance in $G$ is 2, then $G'$ is 2-connected.
+
+\medskip
+\noindent \emph{Solution.} Let us first note that $G'$ is connected since it is
+made by adding edges to the connected graph $G.$
+
+To show that $G'$ is 2-connected we must show that any vertex cut must have at
+least two elements. Suppose not. Then $G'$ has a cut vertex $v$ and $G'-v$ is
+disconnected.
+
+Now, since $G'$ is connected, $G'-v$ is disconnected if and only if some of the
+neighbors of $v$ in $G'$ are in one component of $G'-v$ and some are in another
+component of $G'-v$.
+
+By definition of $G'$, the neighbors of $v$ in $G$ are adjacent in $G'$ and
+therefore they are in the same component of $G'-v$. Hence the neighbors of $v$
+in $G'$ are in the same component of $G'-v$ and hence $G'-v$ is connected, a
+contradiction.
+
+\medskip
+
+\medskip
+\1 Show that if a connected graph $G$ has blocks $B_1,B_2,\dots,B_k$, then
+\[|G| = \left( \sum_{i=1}^k |B_i| \right)- k + 1.\]
+
+\medskip
+\noindent \emph{Solution.} Let us give two proofs.
+
+First proof. It follows from corollary 5.9 on page 113 of the book that two
+distinct blocks have at most one vertex in common and that vertex is a cut
+vertex.
+
+Another way to look at what corollary 5.9 is as follows. If we form a new graph
+$G^*$ with one vertex for each block of $G$ and an edge between vertices $v_1$
+and $v_2$ if and only if $B_1\cap B_2\neq\varnothing$, where $v_i$ corresponds
+to $B_i$, then the graph $G^*$ is a tree on $k$ vertices. This is because
+corollary 5.9(c) means that each edge of $G^*$ is a bridge, and therefore $G^*$
+is a tree by Theorem 4.1 on page 86.
+
+We use the fact that a tree on $k$ vertices has $k-1$ edges to see that there
+are $k-1$ cut vertices.
+
+Therefore if we form the sum \(\sum_{i=1}^k |B_i| \) we have counted each cut
+vertex twice. So we subtract the number of cut vertices to obtain \( (
+\sum_{i=1}^k |B_i| )- k + 1\), as required.
+
+Second proof. We proceed by induction on $k$. If $k=1$ then $|G| = |B_1|$.
+Assume the result is true for all graphs with $k-1$ blocks. We must prove it
+for a graph $G$ with $k$ blocks.
+
+The fact that $k > 1$ means that $\kappa(G) = 1$ because deleting any cut
+vertex will result in a disconnected graph. Thus $G$ is not 2-connected, so
+there is a block $B$ which contains only one of the cut vertices (this block
+corresponds to an end vertex of the tree $G^*$ constructed in the first proof,
+and such end vertices exist in trees by 4.3 on page 89 of the book). Write $v$
+for this cut vertex. We may choose notation so that $B = B_k$ is the highest
+numbered block.
+
+Put $G' := G - (V(B_k) - \{v\})$. The graph $G'$ is connected and has blocks
+$B_1,\dots,B_{k-1}.$ By induction, we have $|G'| =
+(\sum_{i=1}^{k-1}|B_i|)-(k-1)+1.$ Since we deleted $|B_k|-1$ vertices from $G$
+to obtain $G'$, we have \( |G| = ( \sum_{i=1}^k |B_i| )- k + 1\), as required.
+
+(Secretly, this proof reproduces the inductive proof that a tree on $n$
+vertices has $n-1$ edges.)
+
+\end{outline}
+
+\end{document}

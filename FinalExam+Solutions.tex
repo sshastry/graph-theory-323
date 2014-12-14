@@ -1,0 +1,246 @@
+\documentclass[10pt,reqno]{amsart}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{stmaryrd}
+\usepackage{hyperref}
+\usepackage{eucal}
+\usepackage{fullpage}
+\usepackage{outlines}
+
+\renewcommand{\labelitemi}{$\star$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\noindent \textit{Math 323: Graph Theory}
+
+\noindent \textit{Instructor: Sreekar M.~Shastry}
+
+\noindent \textit{Solutions to the Final Examination}
+
+\noindent \textit{2013-April-19-Fri, 0900-1200 in room C304 of HR4}
+
+\medskip
+
+\begin{itemize}
+    \item There are 10 problems. Each problem is worth 5 points. The
+        maximum score is 50 points.
+    \item This is an open book exam.
+    \item Clearly state the results from the book that you use, referring to
+      the page number.
+\end{itemize}
+
+\medskip
+
+\begin{outline}[enumerate]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\1 Show that $K_{n,n}$ has $n!(n-1)!/2$ Hamiltonian cycles.
+
+\medskip
+\noindent \emph{Solution.}
+Since we are working with the \emph{complete} bipartite graph, in order to give
+a Hamiltonian cycle, it suffices to give an ordering in which the vertices of
+each partite set will be visited. In other words, we must count the number of
+sequences of the form \[u_1 v_1 u_2 v_2 \cdots u_n v_n\] where the $u_i$ are in
+one partition and the $v_i$ are in the other; this is because the completeness
+guarantees us that once we have chosen the first $k$ vertices of the cycle, we
+can choose any of the remaining unvisited vertices in the other bipartition,
+and by the time we reach $v_n$, there will be an unused edge from $v_n$ back to
+$u_1$ to complete the cycle.
+
+Now, without loss of generality, we fix our start vertex $u_1.$ There are $n!$
+ways to order the $v_i$ and $(n-1)!$ ways to order $u_2, u_3, \dots, u_n$. But
+we have counted each Hamiltonian cycle twice since a cycle can be traversed in
+either direction. Thus the total number of Hamiltonian cycles is $n!(n-1)!/2.$
+
+\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\1 Show that in a league with two divisions of 13 teams each, no schedule has
+each team playing exactly nine games against teams in its own division and four
+games against teams in the other division.
+
+\medskip
+\noindent \emph{Solution.} Suppose that there existed such a schedule of games.
+Then we form the graph $G$ with a vertex for each team and an edge for each
+game. Then the subgraph $H$ induced by the 13 teams in one division is
+9-regular. But we know that $H$ cannot exist, since in an $r$ regular graph on
+$n$ vertices, one of $r$ and $n$ must be even.
+
+\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\1 Show that if $n \ge 2$ and $d_1, d_2, \dots, d_n$ are positive integers with
+$d_1 \ge d_2 \ge \cdots \ge d_n,$ then there exists a tree with these as its
+vertex degrees if and only if $d_n = 1$ and $\sum_{i=1}^n d_i = 2(n-1).$
+
+\medskip
+\noindent \emph{Solution.} (I misstated the problem. The condition should have
+included $d_n = d_{n-1} = 1,$ not just $d_n=1.$ The problem is still true as
+stated, but is a little more difficult.)
+
+$(\Rightarrow)$ Given a tree $T$, we know that $T$ has $n$ vertices and $n-1$
+edges, thus $\sum d_i = 2(n-1)$ by the fact that $\sum_{v\in G} \deg(v) = 2m$
+on any graph.
+
+Now, since any tree has at least two end vertices $v_n, v_{n-1}$, it follows
+that $d_n = d_{n-1} = 1.$
+
+$(\Leftarrow)$ We give an explicit construction of a tree $T$. Suppose that
+there are $k$ 1's in the degree sequence. Since the sum is $2n-2$ and all the
+$d_i \ge 1$ we have $k \ge 2.$ We draw a path $x, u_1, \dots, u_{n-k}, y.$ For
+$1 \le i \le n-k,$ attach $d_i-2$ vertices of degree 1 to $u_i.$ The resulting
+graph is a tree $T$ (there may be many trees with the degree sequence, but we
+only have to produce one of them).
+
+In $T$, it follows from the construction that $\deg u_i = d_i$ for $i =
+1,\dots, n-k$. So we need only check that $T$ has the correct number of leaves,
+namely $k$ leaves. Observe that with our notation, we have $d_j = 1$ for $j =
+n-k+1, \dots, n.$ Now, $x$ and $y$ are leaves, so the total number of leaves is
+\[2 + \sum_{i=1}^{n-k} (d_i-2) = 2-2(n-k)+\sum_{i=1}^n d_i - \sum_{i=n-k+1}^n
+d_i = 2-2(n-k)+2(n-1)-k = k\] as required.
+
+\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\1 Show that a tree has at most one perfect matching.
+
+\medskip
+\noindent \emph{Solution.} Let $T$ be a tree on $n$ vertices. We give a proof
+by induction on $n.$ We verify the cases $n=1$ and $n=2$. A tree on 1 vertex
+has no perfect matching and a tree on two vertices has one perfect matching.
+
+Let $T$ be a tree on $n$ vertices and let $v$ be a leaf of $T$. In any perfect
+matching, $v$ must be matched to its unique neighbor $u$. The remainder of any
+matching is a matching in $T-\{u,v\}$. Thus any perfect matching in $T$ must
+contain the edge $uv$ so that the number of perfect matchings in $T$ equals the
+number of perfect matchings in $T-\{u,v\}$.
+
+The graph $T-\{u,v\}$ is a forest, i.e.~a disjoint union of trees. By
+induction, each component has at most one perfect matching. The number of
+perfect matchings in a graph is the product of the number of perfect matchings
+in each component, therefore $T-\{u,v\}$ has at most one perfect matching and
+therefore so does $T$.
+
+(This is actually a proof by strong induction.)
+
+\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\1 Let $G$ be a bipartite graph with bipartitions $X$ and $Y$ such that $|X|
+\le |Y|$. Suppose that $|N(S)| > |S|$ for every nonempty subset $S$ of $X$.
+Show that for each edge $e$ of $G$, there exists a matching $M$ such that $e\in
+M$ and $|M| = |X|.$
+
+\medskip
+\noindent \emph{Solution.} Let $xy$ be an edge of $G$ with $x\in X$ and $y\in
+Y$ and put $G' := G-x-y.$ Each set $S \subset X-\{x\}$ loses at most one
+neighbor when $y$ is deleted. Since $|N(S)| > |S|$ by assumption, we have
+$|N_{G'}(S)| \ge |N_G(S)|-1 \ge |S|.$ Therefore $G'$ satisfies the condition of
+Theorem 8.3 (Hall's theorem) and therefore $G'$ has a matching $M'$ such that
+$|M'| = |X|-1$. Then $M := M' \cup \{xy\}$ is the required matching which
+contains $xy$ and is such that $|M| = |X|$.
+
+\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\1 Two people play a game on the graph $G$, alternately choosing distinct
+vertices. Player 1 starts by choosing any vertex $v_1$. Player 2 then chooses
+any vertex $w_1$ adjacent to $v_1$. Each subsequent choice must be adjacent to
+the preceding choice of the other player. Together, the players follow a path
+through the graph. The last player able to move wins.
+
+Show that if $G$ has a perfect matching, then Player 2 has a winning strategy.
+
+\medskip
+\noindent \emph{Solution.} Let $M$ be a perfect matching of $G$. Thus $|G|$ is
+necessarily even. Whenever Player 1 chooses a vertex $v$, Player 2 chooses the
+vertex $w$ which is matched to $v$ by $M$, i.e.~such that $vw\in M$. Since $M$
+is a perfect matching the sequence of moves is $v_1 w_1 v_2 w_2 \cdots v_k w_k$
+with $|G| = 2k$. Thus Player 2 always has the last move.
+
+\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\1 Show that every graph $G$ with $\delta(G) \ge (n+k-2)/2$ is $k$-connected,
+where $k \le n-1$.
+
+\medskip
+\noindent \emph{Solution.} If $G$ is not $k$-connected, then we can delete a
+set $S$ of $k-1$ vertices to get a disconnected subgraph $H$. Let $v \in H$.
+Since $v$ has at most $k-1$ neighbors in $S$, we have that \[\deg_{H}(v) \ge
+\delta(G) - k + 1 \ge (n-k)/2.\] Thus each component of $H$ has at least
+$1+(n-k)/2$ vertices. Since $H$ is disconnected, it has at least two
+components, and therefore $H$ has at least $n-k+2$ vertices. But $n = |G| = |H|
++ |S| \ge (n-k+2) + (k-1) > n$. This is a contradiction.
+
+\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\1 A directed acyclic graph (DAG) is a directed graph $G$ without any directed
+cycles. A topological ordering of a directed graph $G$ is an ordering of its
+vertices $v_1,v_2,\dots,v_n$ such that if $(v_i,v_j)$ is an edge of $G$ then $i
+< j$.
+
+Show that $G$ is a DAG if and only if $G$ has a topological ordering.
+
+\medskip
+\noindent \emph{Solution.} $(\Rightarrow)$ If $G$ has no cycles, then some
+vertex $v$ has outdegree 0. Let $v_n := v$ be the last in the ordering. Now
+$G-v$ has no cycles and we may repeat the previous step to find $v_{n-1}$. And
+so on. Suppose that we have completed the execution of this algorithm. Then by
+construction, $v_j$ is such that it has no successors among $v_1, \dots,
+v_{j-1}$. This shows that $(v_i,v_j) \in E(G) \Rightarrow i < j$.
+
+$(\Leftarrow)$ We are given a topological ordering $v_1,v_2,\dots,v_n$ on $G$.
+Suppose that $G$ has cycle $C$. Let $v_i$ be the lowest-indexed vertex on $C$
+and let $v_j$ be the vertex on $C$ just before $v_i$. Thus $(v_j,v_i)$ is an
+edge. By our choice of $i$ we have $j > i$ which contradicts the fact that
+$v_1,v_2,\dots,v_n$ is a topological ordering.
+
+\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\1 Show that there is a tournament on $n$ vertices such that the indegree is
+equal to the outdegree for every vertex if and only if $n$ is odd.
+
+\medskip
+\noindent \emph{Solution.} $(\Rightarrow)$ We prove the contrapositive. If $n$
+is even, then $n-1 = \mathrm{outdeg}(v) + \mathrm{indeg}(v)$ is odd, thus the
+summands cannot be equal integers.
+
+$(\Leftarrow)$ If $n$ is odd, then every vertex of $K_n$ has even degree, and
+therefore there exists an Eulerian circuit on $K_n$ by Theorem 6.1. Orienting
+the edges of $K_n$ in the forward direction by following an Eulerian circuit
+produces tournament we are looking for.
+
+\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\1 On a chessboard, a knight can move from a square at coordinate $(a,b)$ to a
+square at coordinate $(a',b')$ if and only if $(|a-a'| = 1$ and $|b-b'| = 2)$
+or $(|a-a'| = 2$ and $|b-b'| =1)$. This is just the familiar L-shaped knight's
+move. Show that no $4\times n$ chessboard has a knight's tour: a traversal by
+knight's moves that visits each square once and returns to the start. (Hint: If
+a graph $G$ is Hamiltonian then $k(G-S) \le |S|$ for all nonempty $S \subset
+G$.)
+
+\medskip
+\noindent \emph{Solution.} Let $G$ be the graph with a vertex for each square
+and an edge for each pair of squares whose positions differ by a knight's move.
+The existence of the knight's tour is equivalent to the existence of a
+Hamiltonian cycle in $G$.
+
+There are 4 rows. We observe that every neighbor of a white square in the top
+and bottom rows is a black square in the middle two rows. Let $S$ be the set of
+black squares in the middle two rows, so that $|S| = n$. In $G-S$, the white
+squares in the top and bottom rows are thus $n$ isolated vertices. Now $|G-S| =
+3n$, and in $G-S$ we have found $n$ isolated vertices. The remaining $2n$
+vertices in $G-S$ must belong to at least one other connected component. Thus
+$G-S$ has at least $n+1$ components. Therefore $k(G-S) > |S|$ and $G$ is not
+Hamiltonian, as required.
+
+\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{outline}
+
+\end{document}
+
+
